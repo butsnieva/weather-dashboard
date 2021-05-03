@@ -6,6 +6,7 @@ function searchOnClick(event) {
     event.preventDefault()
     var searchTerm = document.querySelector('#search-term').value
     getCurrentWeather(searchTerm)
+    getFiveDayForecast(searchTerm)
     shiftToTheLeft()
 }
 
@@ -51,12 +52,11 @@ function createCurrentWeatherModal (data) {
     var latitude = data.coord.lat;
     var longitude = data.coord.lon;
 
-    fetch('https://api.openweathermap.org/data/2.5/uvi?appid=61f172bd2a4837729bfd40bf2e1005cb&lat=' + latitude + '&lon=' +longitude)
+    fetch('https://api.openweathermap.org/data/2.5/uvi?appid=6a58b6d33fa24bab63eab94d11467ca1&lat=' + latitude + '&lon=' +longitude)
     .then(function(response) {
     return response.json()
     })
     .then(function(data) {
-        console.log(data)
     var uvEl = $('<p>').addClass('card-text').text('UV Index: ')
 
     var uvValue = document.createElement('span');
@@ -82,6 +82,17 @@ function createCurrentWeatherModal (data) {
     $('#current-weather').append(card);
 }
 
-// function weatherIcons () {
-//     if ()
+function getFiveDayForecast (city) {
+    fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=6a58b6d33fa24bab63eab94d11467ca1&units=imperial')
+        .then(function(response) {
+        return response.json()
+    })
+    .then(function(data) {
+        console.log(data)
+    })
+}
+
+// function createFiveDayForecastModal () {
+
 // }
+
