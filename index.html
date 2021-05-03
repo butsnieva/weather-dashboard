@@ -13,12 +13,12 @@
     </header>
     <main>
         <div class="col-3">
-            <div id="search-by-city" class="d-grid gap-2">
+            <form id="search-by-city" class="d-grid gap-2">
                 <h3>Search for a City:</h3>
-                <input type="text" placeholder="San Diego" class="form-control-l form-control" />
-                <button id="search-btn" type="submit" class="btn btn-primary" disabled>Search</button>
+                <input id="search-term" type="text" placeholder="San Diego" class="form-control-l form-control" />
+                <button id="search-btn" type="submit" class="btn btn-primary">Search</button>
                 <hr/>
-            </div>
+            </form>
             <div id="city-btns" class="d-grid gap-2">
                 <button type="button" class="btn btn-secondary" data-attribute="austin">Austin</button>
                 <button type="button" class="btn btn-secondary" data-attribute="chicago">Chicago</button>
@@ -37,7 +37,6 @@
         </div>
     </main>
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 <script src="./assets/js/script.js"></script>
 </body>
 </html>
