@@ -17,7 +17,8 @@ Uses localStorage to store any cities that have been searched for prior
 ## Website
 https://butsnieva.github.io/weather-dashboard/
 
-<img width="1009" alt="Screen Shot 2021-05-03 at 10 47 29 AM" src="https://user-images.githubusercontent.com/80425583/116899262-f7a7a700-abfc-11eb-90be-2449300945f0.png">
+<img width="687" alt="Screen Shot 2021-05-03 at 3 30 55 PM" src="https://user-images.githubusercontent.com/80425583/116929818-8f6cbb80-ac24-11eb-97b9-f9887274a31b.png">
+
 
 ## Contribution
 Made with ❤️ by Kateryna B.
