@@ -10,9 +10,12 @@ function searchOnClick(event) {
     if (!searchTerm) {
         alert('Please enter a city name.')
     } else {
-    getCurrentWeather(searchTerm)
-    getFiveDayForecast(searchTerm)
-    searchEl.reset()    
+        var btnsEl = document.querySelector('#city-btns')
+        btnsEl.innerHTML = ''
+
+        getCurrentWeather(searchTerm)
+        getFiveDayForecast(searchTerm)
+        searchEl.reset()    
     }
 }
 
@@ -30,8 +33,9 @@ function getCurrentWeather (city) {
             response.json().then(function(data){
             shiftToTheLeft()
             createCurrentWeatherModal(data)
-            cityList.push(data.name)
-            localStorage.setItem('cityList', JSON.stringify(cityList))
+                cityList.push(data.name)
+                localStorage.setItem('cityList', JSON.stringify(cityList))
+            loadFromLocalStorage()
         })
         } else {
             alert('Error: City Not Found')
@@ -167,13 +171,15 @@ function loadFromLocalStorage(){
     if (!cityList) {
         cityList = [] 
     } else {
-    for (var i = 0; i < cityList.length; i++){
-        console.log(cityList)
+    for (var i = 0; i < cityList.length; i++){    
+        createBtn(cityList[i])
     }}
 }
 
-function createBtn () {
-
+function createBtn (city) {
+    var button = $('<button type="button" class="btn btn-secondary" data-attribute="' + city.toLowerCase() + '">' + city + '</button>')
+    $('#city-btns').append(button)
+    //debugger
 }
 
 loadFromLocalStorage()
