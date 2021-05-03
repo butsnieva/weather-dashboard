@@ -40,17 +40,17 @@ function createCurrentWeatherModal (data) {
 
     var title = $('<h3>').addClass('card-title').text(data.name)
     var todaysDate = $('<h4>').text(moment().format('MM/DD/YYYY'))
-    var icon = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
+    var icon = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png")
     var card = $('<div>').addClass('card')
-    var cardBody = $('<div>').addClass('card-body');
+    var cardBody = $('<div>').addClass('card-body')
     
 
-    var temp = $("<p>").addClass("card-text").text("Temperature: " + data.main.temp + "°F");
-    var humidity = $("<p>").addClass("card-text").text("Humidity: " + data.main.humidity + "%");
-    var wind = $("<p>").addClass("card-text").text("Wind: " + data.wind.speed + " MPH");
+    var temp = $("<p>").addClass("card-text").text("Temperature: " + data.main.temp + "°F")
+    var humidity = $("<p>").addClass("card-text").text("Humidity: " + data.main.humidity + "%")
+    var wind = $("<p>").addClass("card-text").text("Wind: " + data.wind.speed + " MPH")
     
-    var latitude = data.coord.lat;
-    var longitude = data.coord.lon;
+    var latitude = data.coord.lat
+    var longitude = data.coord.lon
 
     fetch('https://api.openweathermap.org/data/2.5/uvi?appid=6a58b6d33fa24bab63eab94d11467ca1&lat=' + latitude + '&lon=' +longitude)
     .then(function(response) {
@@ -59,27 +59,27 @@ function createCurrentWeatherModal (data) {
     .then(function(data) {
     var uvEl = $('<p>').addClass('card-text').text('UV Index: ')
 
-    var uvValue = document.createElement('span');
+    var uvValue = document.createElement('span')
         uvValue.textContent = data.value
-    var uvIndex = data.value;
+    var uvIndex = data.value
     
     if(uvIndex < 3) {
-        uvValue.classList.add('bg-success');
+        uvValue.classList.add('bg-success')
     } else if (uvIndex < 7) {
-        uvValue.classList.add('bg-warning');
+        uvValue.classList.add('bg-warning')
     } else {
-        uvValue.classList.add('bg-danger');
+        uvValue.classList.add('bg-danger')
     }
 
-    cardBody.append(uvEl);
-    $('#current-weather .card-body').append(uvEl.append(uvValue));
-    });
+    cardBody.append(uvEl)
+    $('#current-weather .card-body').append(uvEl.append(uvValue))
+    })
     
     
-    title.append(icon);
-    cardBody.append(title,todaysDate, temp,humidity,wind);
-    card.append(cardBody);
-    $('#current-weather').append(card);
+    title.append(icon)
+    cardBody.append(title,todaysDate, temp,humidity,wind)
+    card.append(cardBody)
+    $('#current-weather').append(card)
 }
 
 function getFiveDayForecast (city) {
@@ -89,10 +89,29 @@ function getFiveDayForecast (city) {
     })
     .then(function(data) {
         console.log(data)
+        createFiveDayForecastModal(data)
     })
 }
 
-// function createFiveDayForecastModal () {
+function createFiveDayForecastModal (data) {
+    $('#forecast-five-days').html('<h3>5-Day Forecast:</h3>')
+    var forecastEl = $('<div>').addClass('forecast-el row')
+    $('#forecast-five-days').append(forecastEl)
 
-// }
+    for (var i = 0; i < 5; i++) {
+        var date = moment().add(i+1, 'days').format('l')
+        var cardTitle = $('<h3>').addClass('card-title').text(date)
+        var icon = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png")
+        var card = $('<div>').addClass('card')
+        var cardBody = $('<div>').addClass('card-body')
+        var column = $('<div>').addClass('col')
+        
+        var temp = $("<p>").addClass("card-text").text("Temperature: " + data.list[i].main.temp + "°F")
+        var humidity = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%")
+        var wind = $("<p>").addClass("card-text").text("Wind: " + data.list[i].wind.speed + " MPH")
+        
+        column.append(card.append(cardBody.append(cardTitle,icon,temp,humidity,wind)))
+        forecastEl.append(column)
+    }
+}
 
