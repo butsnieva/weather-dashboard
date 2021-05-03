@@ -1,6 +1,7 @@
 var searchEl = document.querySelector('#search-by-city')
 var cityBtn = document.querySelector('#city-btns')
 
+
 searchEl.addEventListener('submit', searchOnClick)
 
 function searchOnClick(event) {
@@ -11,7 +12,7 @@ function searchOnClick(event) {
     } else {
     getCurrentWeather(searchTerm)
     getFiveDayForecast(searchTerm)
-    searchEl.reset()
+    searchEl.reset()    
     }
 }
 
@@ -29,6 +30,8 @@ function getCurrentWeather (city) {
             response.json().then(function(data){
             shiftToTheLeft()
             createCurrentWeatherModal(data)
+            cityList.push(data.name)
+            localStorage.setItem('cityList', JSON.stringify(cityList))
         })
         } else {
             alert('Error: City Not Found')
@@ -150,3 +153,27 @@ var buttonClickHandler = function(event) {
     }
 }
 cityBtn.addEventListener('click', buttonClickHandler)
+
+
+
+
+
+
+// local storage in progress
+
+
+function loadFromLocalStorage(){
+    cityList = JSON.parse(localStorage.getItem("cityList"))
+    if (!cityList) {
+        cityList = [] 
+    } else {
+    for (var i = 0; i < cityList.length; i++){
+        console.log(cityList)
+    }}
+}
+
+function createBtn () {
+
+}
+
+loadFromLocalStorage()
