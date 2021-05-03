@@ -6,9 +6,13 @@ searchEl.addEventListener('submit', searchOnClick)
 function searchOnClick(event) {
     event.preventDefault()
     var searchTerm = document.querySelector('#search-term').value
+    if (!searchTerm) {
+        alert('Please enter a city name.')
+    } else {
     getCurrentWeather(searchTerm)
     getFiveDayForecast(searchTerm)
-    shiftToTheLeft()
+    searchEl.reset()
+    }
 }
 
 function shiftToTheLeft () {
@@ -23,14 +27,16 @@ function getCurrentWeather (city) {
     .then(function(response) {
         if (response.ok) {
             response.json().then(function(data){
+            shiftToTheLeft()
             createCurrentWeatherModal(data)
         })
         } else {
             alert('Error: City Not Found')
+            return
         }
     }) 
     .catch(function(error) {
-        alert('Unable to connect to Weather Portal')
+        alert('Unable to connect to the Weather Portal')
     })
     
 }
@@ -88,12 +94,14 @@ function createCurrentWeatherModal (data) {
 function getFiveDayForecast (city) {
     fetch('https://api.openweathermap.org/data/2.5/forecast?q=' + city + '&appid=6a58b6d33fa24bab63eab94d11467ca1&units=imperial')
         .then(function(response) {
-        return response.json()
-    })
-    .then(function(data) {
-        console.log(data)
-        createFiveDayForecastModal(data)
-    })
+            if (response.ok) {
+                response.json().then(function(data) {
+                    createFiveDayForecastModal(data)
+                })
+            } else {
+                return
+            }}
+        )
 }
 
 function createFiveDayForecastModal (data) {
@@ -133,7 +141,11 @@ var buttonClickHandler = function(event) {
                 })
             } else {
                 alert ('Error: City Not Found')
+                return
             }
+        })
+        .catch(function(error) {
+            alert('Unable to connect to the Weather Portal')
         })
     }
 }
