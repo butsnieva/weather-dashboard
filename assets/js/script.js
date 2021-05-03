@@ -1,4 +1,6 @@
 var searchEl = document.querySelector('#search-by-city')
+var cityBtn = document.querySelector('#city-btns')
+var colResults = document.querySelector('#col-results')
 
 searchEl.addEventListener('submit', searchOnClick)
 
@@ -115,3 +117,23 @@ function createFiveDayForecastModal (data) {
     }
 }
 
+
+
+var buttonClickHandler = function(event) {
+    var city = event.target.getAttribute('data-attribute')
+    if (city) {
+        var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=6a58b6d33fa24bab63eab94d11467ca1&units=imperial'
+        fetch(apiUrl).then(function(response){
+            if (response.ok) {
+                response.json().then(function(data){
+                    getCurrentWeather(city)
+                    getFiveDayForecast(city)
+                    shiftToTheLeft()
+                })
+            } else {
+                alert ('Error: City Not Found')
+            }
+        })
+    }
+}
+cityBtn.addEventListener('click', buttonClickHandler)
