@@ -1,0 +1,14 @@
+main {
+    display: flex;
+}
+
+.col-search {
+    width: 40%;
+    margin: 0 30%;
+    text-align: center;
+    transition: all 1s linear;
+}
+
+.col-results {
+    
+}
