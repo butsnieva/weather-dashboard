@@ -1,6 +1,5 @@
 var searchEl = document.querySelector('#search-by-city')
 var cityBtn = document.querySelector('#city-btns')
-var colResults = document.querySelector('#col-results')
 
 searchEl.addEventListener('submit', searchOnClick)
 
@@ -39,7 +38,9 @@ function getCurrentWeather (city) {
 
 
 function createCurrentWeatherModal (data) {
-    
+    var currentWeatherEl = document.querySelector('#current-weather')
+        currentWeatherEl.innerHTML = ''
+
     var title = $('<h3>').addClass('card-title').text(data.name)
     var todaysDate = $('<h4>').text(moment().format('MM/DD/YYYY'))
     var icon = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png")
