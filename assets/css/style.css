@@ -1,14 +1,32 @@
 main {
     display: flex;
+    margin: 20px;
+}
+
+h1 {
+    margin: 10px 0 20px 0;
+    padding: 20px;
+    background-color: cornflowerblue;
+    color: white;
 }
 
 .col-search {
     width: 40%;
     margin: 0 30%;
+    padding: 0 10px;
     text-align: center;
-    transition: all 1s linear;
+    transition: all 0.1s linear;
 }
 
 .col-results {
-    
+    padding: 0 10px;
+}
+#current-weather {
+    margin: 45px 0 30px 0;
+}
+
+#current-weather span {
+    padding: 3px 7px;
+    color: white;
+    border-radius: 8px;
 }
